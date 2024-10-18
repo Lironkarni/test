@@ -6,11 +6,11 @@ TARGET = assembler
 # הקומפיילר
 CC = gcc
 
-# דגלי קומפילציה (ניתן להוסיף -g לדיבוג או -Wall להתרעות)
-CFLAGS = -Wall -std=c11
+# דגלי קומפילציה (כולל את הנתיב של קבצי ההדרים)
+CFLAGS = -Wall -ansi -pedantic -std=c11 -Iinclude
 
 # כל קבצי המקור (source files)
-SRC = main.c utils.c
+SRC = source/main.c source/utils.c
 
 # כל קבצי האובייקט (object files) שנוצרים מקבצי המקור
 OBJ = $(SRC:.c=.o)
@@ -23,7 +23,7 @@ $(TARGET): $(OBJ)
 	$(CC) $(CFLAGS) -o $(TARGET) $(OBJ)
 
 # כלל ליצירת קבצי אובייקט
-%.o: %.c
+source/%.o: source/%.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
 # כלל לניקוי קבצים
